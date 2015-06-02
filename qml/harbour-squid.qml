@@ -45,12 +45,12 @@ ApplicationWindow
                         });
         }
           function start(){
-                   call('mypy.start',[],function(result){
+                   call('mainpy.start',[],function(result){
                        return result
                    })
                }
           function kill(){
-                   call('mypy.kill',[],function(result){
+                   call('mainpy.kill',[],function(result){
                        return result
                    })
                }
@@ -58,5 +58,6 @@ ApplicationWindow
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }
+
 
 

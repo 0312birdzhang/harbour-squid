@@ -60,7 +60,7 @@ Page {
                 Python{
                     id:statuspy
                     Component.onCompleted: {
-                        addImportPath(Qt.resolvedUrl('./py')); // adds import path to the directory of the Python script
+                        addImportPath(Qt.resolvedUrl('./')); // adds import path to the directory of the Python script
                                     statuspy.importModule('mainpy', function () { // imports the Python module
                                         call('mainpy.isrun',[],function(result){
                                             status.text = result?qsTr("Running"):qsTr("Not Running");
@@ -85,20 +85,25 @@ Page {
                     right: parent.right
                     margins: Theme.paddingMedium
                 }
-
+                height: squidicon.height
                 Image{
                     id:squidicon
-                    source:"squid.png"
+                    source:"./squid.png"
                     fillMode: Image.PreserveAspectFit
                     width:parent.width /2- Theme.paddingLarge
                     height:parent.width /2- Theme.paddingMedium
                     anchors.horizontalCenter: parent.horizontalCenter
-                    MouseArea{
-                        onClicked: {
-                            isrun?mainpy.kill():mainpy.start()
-                            status.update()
-                        }
-                    }
+                }
+            }
+            Item{width:1;height: 1}
+            Button{
+                id:switchButton
+                text:"Switch"
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: switchLabel.bottom
+                onClicked: {
+                    isrun?mainpy.kill():mainpy.start()
+                    pageStack.replace(Qt.resolvedUrl("FirstPage.qml"))
                 }
             }
         }

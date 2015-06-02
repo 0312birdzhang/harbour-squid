@@ -7,7 +7,7 @@ import pyotherside
 
 #stop squid
 def kill():
-    p = subprocess.Popen("ps -ef|grep squid|grep -v grep|awk '{print $2}'|xargs kill -9",shell=True,stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    p = subprocess.Popen('sh -c "echo asd10086 | devel-su -c /usr/local/squid/sbin/squid -k kill"',shell=True,stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     #0则安装成功
     retval = p.wait()
     code = p.returncode
@@ -18,12 +18,12 @@ def kill():
 
 #start squid
 def start():
-    p = subprocess.Popen(" /usr/local/squid/sbin/squid -s -f /usr/local/squid/etc/squid.conf",shell=True)
+    p = subprocess.Popen('sh -c "echo asd10086 | devel-su -c /usr/local/squid/sbin/squid -s -f /usr/local/squid/etc/squid.conf"',shell=True)
     retval = p.wait()
 
 #is running
 def isrun():
-    p = subprocess.Popen("ps -ef|grep squid|grep -v grep|wc -l",shell=True,stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    p = subprocess.Popen('sh -c "echo asd10086 | devel-su -c  ps -ef|grep squid.conf|grep -v grep|wc -l"',shell=True,stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     #0则安装成功
     wc = p.stdout.readlines()
     wc = wc[0].decode('utf-8').strip('\n')
